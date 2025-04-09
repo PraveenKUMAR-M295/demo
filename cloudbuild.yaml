@@ -1,10 +1,10 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/valeo-cp0992-dev/ci-cd-cloud-run', '.']
+  args: ['build', '-t', 'europe-west1-docker.pkg.dev/valeo-cp0992-dev/cloud-run-source-deploy/test', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/valeo-cp0992-dev/ci-cd-cloud-run']
+  args: ['push', 'europe-west1-docker.pkg.dev/valeo-cp0992-dev/cloud-run-source-deploy/test']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'test-app1', '--image', 'gcr.io/valeo-cp0992-dev/ci-cd-cloud-run', '--region', 'europe-west1', '--platform', 'managed']
+  args: ['run', 'deploy', 'static-file-demo', '--image', 'europe-west1-docker.pkg.dev/valeo-cp0992-dev/cloud-run-source-deploy/test', '--region', 'europe-west1', '--platform', 'managed']
 images:
-- gcr.io/valeo-cp0992-dev/ci-cd-cloud-run
+- europe-west1-docker.pkg.dev/valeo-cp0992-dev/cloud-run-source-deploy/test
